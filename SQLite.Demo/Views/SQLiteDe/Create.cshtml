@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>API接口上传图片，以及fileupload上传</title>
+</head>
+<body>
+    <div>
+      <form method="post" enctype="multipart/form-data" action="/SQLiteDe/Create">
+          <input type="file" name="fileup" />
+          
+          <input type="submit" name="sub" value="提交" />
+          @ViewBag.Message
+      </form>
+    </div>
+</body>
+</html>
