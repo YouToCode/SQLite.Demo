@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLite.Demo", "SQLite.Demo\SQLite.Demo.csproj", "{CC59F1AC-6BFF-47FD-8227-ED5B0C185999}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCLUtility", "HCLUtility\HCLUtility.csproj", "{4054F82E-9021-46E9-99E4-172E1338AF56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CC59F1AC-6BFF-47FD-8227-ED5B0C185999}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC59F1AC-6BFF-47FD-8227-ED5B0C185999}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC59F1AC-6BFF-47FD-8227-ED5B0C185999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4054F82E-9021-46E9-99E4-172E1338AF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4054F82E-9021-46E9-99E4-172E1338AF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4054F82E-9021-46E9-99E4-172E1338AF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4054F82E-9021-46E9-99E4-172E1338AF56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

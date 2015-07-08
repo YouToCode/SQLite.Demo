@@ -10,8 +10,7 @@ namespace SQLite.Demo.Models
 {
     public class SQLiteHelper2
     {
-        private static string connectionstring = "Data Source=" + HttpRuntime.AppDomainAppPath +System.Configuration.ConfigurationManager.ConnectionStrings["conStr"].ConnectionString + ";Pooling=True;FailIfMissing=false; Max Pool Size=512; Min Pool Size=5";
-
+        private static string connectionstring = "Data Source=" + HttpRuntime.AppDomainAppPath +System.Configuration.ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
         public static string Connectionstring
         {
             get { return SQLiteHelper2.connectionstring; }
@@ -86,6 +85,11 @@ namespace SQLite.Demo.Models
         {
 
             SQLiteCommand cmd = new SQLiteCommand();
+            
+            //SQLiteConnectionStringBuilder scs = new SQLiteConnectionStringBuilder();
+            //scs.DataSource = connectionstring;
+            //scs.Password = "";
+            
             cmd.Connection = new SQLiteConnection(connectionstring);
             cmd.CommandText = cmdText;
             cmd.CommandType = cmdType;
@@ -95,7 +99,10 @@ namespace SQLite.Demo.Models
                     cmd.Parameters.Add(p);
 
             cmd.Connection.Open();
+            //cmd.Connection.ChangePassword("pwd");//给SQLite设置密码
+            //cmd.Connection.SetPassword("pwd");//打开带密码的SQLite
             return cmd;
         }
+       
     }
 }

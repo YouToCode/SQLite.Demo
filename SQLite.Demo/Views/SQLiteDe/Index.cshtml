@@ -2,6 +2,7 @@
     Layout = null;
 }
 
+
 <!DOCTYPE html>
 
 <html>
@@ -11,15 +12,26 @@
 </head>
 <body>
     <div>
-  
+       
         
         <form method="post" action="/SQLiteDe/Index">
+            @Html.AntiForgeryToken()
             <input id="name" name="name" /><br />
             <input id="createdate" name="createdate" value="@DateTime.Now" />
             <br />
             <input type="submit" value="提交" />
             @ViewBag.Message
         </form>
+       
     </div>
+    <hr />
+    @if (Model.Tables.Count > 0 && Model != null)
+    {
+
+        for (int i = 0; i < Model.Tables[0].Rows.Count; i++)
+        {
+            <p>@Model.Tables[0].Rows[i]["name"].ToString()|@Model.Tables[0].Rows[i]["createdate"].ToString()</p>
+        }
+    }
 </body>
 </html>
