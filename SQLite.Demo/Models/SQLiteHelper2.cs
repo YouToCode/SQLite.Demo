@@ -10,7 +10,7 @@ namespace SQLite.Demo.Models
 {
     public class SQLiteHelper2
     {
-        private static string connectionstring = "Data Source=" + HttpRuntime.AppDomainAppPath +System.Configuration.ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
+        private static string connectionstring = "Data Source=" + HttpRuntime.AppDomainAppPath +System.Configuration.ConfigurationManager.ConnectionStrings["conStr2"].ConnectionString;
         public static string Connectionstring
         {
             get { return SQLiteHelper2.connectionstring; }

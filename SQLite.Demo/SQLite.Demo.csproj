@@ -245,6 +245,7 @@
     <Content Include="Views\SQLiteDe\Index.cshtml" />
     <Content Include="Views\SQLiteDe\Create.cshtml" />
     <Content Include="Views\SQLiteDe\DesDemo.cshtml" />
+    <Content Include="Views\SQLiteDe\DesTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HCLUtility\HCLUtility.csproj">

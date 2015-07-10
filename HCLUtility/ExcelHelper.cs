@@ -7,6 +7,7 @@ using System.Text;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using System.Text.RegularExpressions;
 
 
 namespace HCLUtility
@@ -648,6 +649,112 @@ namespace HCLUtility
                 throw ee;
             }
         }
+        #endregion
+
+        #region 直接导出Excel
+        
+        /// <summary>
+        /// 导出Excel文件_过滤html标签
+        /// </summary>
+        /// <param name="ds">DataTable</param>
+        /// <param name="FileName">文件名</param>
+        /// <param name="NoHtml">是否过去html代码</param>
+        public static void CreateExcel(DataTable ds, string FileName,bool NoHtml)
+        {
+
+            HttpResponse resp = System.Web.HttpContext.Current.Response;
+
+            HttpContext.Current.Response.Charset = "";
+            HttpContext.Current.Response.Buffer = true;
+            resp.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+
+            resp.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlPathEncode(FileName));
+
+            string colHeaders = "", ls_item = "";
+            int i = 0;
+
+            DataTable dt = ds;
+            DataRow[] myRow = dt.Select("");
+
+            for (i = 0; i < dt.Columns.Count - 1; i++)
+                colHeaders += dt.Columns[i].Caption.ToString() + "\t";
+            colHeaders += dt.Columns[i].Caption.ToString() + "\n";
+
+            resp.Write(colHeaders);
+
+            if (NoHtml == true)
+            {
+                foreach (DataRow row in myRow)
+                {
+                    for (i = 0; i < dt.Columns.Count - 1; i++)
+                        ls_item += NoHTML(row[i].ToString()) + "\t";
+                    ls_item += NoHTML(row[i].ToString()) + "\n";
+
+                    resp.Write(ls_item);
+                    ls_item = "";
+                }
+            }
+            else
+            {
+                foreach (DataRow row in myRow)
+                {
+                    for (i = 0; i < dt.Columns.Count - 1; i++)
+                        ls_item += row[i].ToString() + "\t";
+                    ls_item += row[i].ToString() + "\n";
+
+                    resp.Write(ls_item);
+                    ls_item = "";
+                }
+            }
+            resp.End();
+
+        }
+
+        /// <summary>
+        /// 过滤Html代码
+        /// </summary>
+        /// <param name="Htmlstring"></param>
+        /// <returns></returns>
+        public static string NoHTML(string Htmlstring)
+        {
+            //删除脚本 
+            Htmlstring = Regex.Replace(Htmlstring, @"<script[^>]*?>.*?</script>", "",
+              RegexOptions.IgnoreCase);
+            //删除HTML 
+            Htmlstring = Regex.Replace(Htmlstring, @"<(.[^>]*)>", "",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"([\r\n])[\s]+", "",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"-->", "", RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"<!--.*", "", RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(quot|#34);", "\"",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(amp|#38);", "&",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(lt|#60);", "<",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(gt|#62);", ">",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(nbsp|#160);", "   ",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(iexcl|#161);", "\xa1",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(cent|#162);", "\xa2",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(pound|#163);", "\xa3",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&(copy|#169);", "\xa9",
+              RegexOptions.IgnoreCase);
+            Htmlstring = Regex.Replace(Htmlstring, @"&#(\d+);", "",
+              RegexOptions.IgnoreCase);
+            Htmlstring.Replace("<", "");
+            Htmlstring.Replace(">", "");
+            Htmlstring.Replace("\r\n", "");
+            Htmlstring = HttpContext.Current.Server.HtmlEncode(Htmlstring).Trim();
+
+            return Htmlstring;
+        }
+
         #endregion
     }
 }

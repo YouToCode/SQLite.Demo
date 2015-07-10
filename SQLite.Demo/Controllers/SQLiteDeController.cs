@@ -258,5 +258,38 @@ namespace SQLite.Demo.Controllers
 
             return Json(JsonConvert.SerializeObject(dt), JsonRequestBehavior.AllowGet);
         }
+
+         public ActionResult DesTest()
+         {
+             return View();
+         }
+        [HttpPost]
+         public ActionResult DesTest(FormCollection form)
+         {
+             Random rd = new Random(); 
+             DateTime dt = DateTime.Now;
+             Dictionary<string, string> dir = new Dictionary<string, string>();
+             string ss = "";
+            for (int i = 0; i < 2000; i++)
+            {
+
+                string sde = rd.Next(000000, 999999).ToString();
+                string des= HCLUtility.DESEncrypt.Encrypt(sde);
+               
+                if (dir.Where(d => d.Value == des).ToList().Count > 0)
+                {
+                    ss += sde + ",";
+                }
+                else
+                {
+                    dir.Add(sde, des);
+                }
+            }
+            
+             DateTime dt2 = DateTime.Now;
+             ViewBag.Message = dt + "----" + dt2+"---"+dir.ToList().Count+"---"+ss;
+             return View();
+         }
+
     }
 }
