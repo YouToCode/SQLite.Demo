@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -218,6 +219,44 @@ namespace SQLite.Demo.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult DesDemo()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DesDemo(FormCollection  form)
+        {
+            string txt = form["txt"];
+            string ddl = form["ddl"];
+
+            string message = txt + ddl;
+            if (ddl == "1")
+                message = HCLUtility.DESEncrypt.Encrypt(txt);
+            else
+                message = HCLUtility.DESEncrypt.Decrypt(txt) == null ? "解密失败" : HCLUtility.DESEncrypt.Decrypt(txt);
+            ViewBag.Message = message;
+            return View();
+        }
+         [HttpPost]
+        public ActionResult JqueryPost()
+        {
+            string txt = Request.Form["txt"];
+            string ddl = Request.Form["ddl"];
+            string message ="";
+            if (ddl == "1")
+                message = HCLUtility.DESEncrypt.Encrypt(txt);
+            else
+                message = HCLUtility.DESEncrypt.Decrypt(txt) == null ? "解密失败" : HCLUtility.DESEncrypt.Decrypt(txt);
+           // string json = "{txt:'"+txt+"',ddl:'" + ddl + "',des:'" + message + "}";
+            Dictionary<string, string> dt = new Dictionary<string, string>();
+            dt.Add("txt", txt);
+            dt.Add("ddl", ddl);
+            dt.Add("des", message);
+
+            return Json(JsonConvert.SerializeObject(dt), JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,0 +1,58 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <title>+ -</title>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <legend>加/解：</legend>
+            <form action="/SQLiteDe/DesDemo" method="post" id="form1">
+                @Html.AntiForgeryToken()
+                <input type="text" name="txt" />
+                <select name="ddl">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select><br />
+                <input type="submit" value="提交" />
+                <input type="button" id="btnJ" value="提交2" />
+                <br />
+                <label id="lbl"></label>
+            </form>
+        </fieldset>
+                @ViewBag.Message
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+        <script>
+            $("#btnJ").click(function () {
+                var fm = $("#form1").serialize();
+               
+                $.post("/SQLiteDe/JqueryPost", fm,
+                function (data) {
+                    // alert("Data Loaded: " + data);
+                    var obj = jQuery.parseJSON(data);
+                   
+                    var olk = "";
+                    olk += "文本：" + obj["txt"] + ",选择:" + obj["ddl"] + ",结果：" + obj["des"];
+                    //$.each(obj, function (index, item) {
+                    //    olk += "文本：" + item["txt"] + ",选择:" + item["ddl"] + ",结果：" + item["des"];
+                    //});
+                    $("#lbl").html(data + "<br/>" + olk+"<br/>");
+                });
+            });
+        </script>
+</div>
+</body>
+</html>

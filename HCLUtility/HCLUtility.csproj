@@ -60,6 +60,7 @@
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="CookieHelper.cs" />
     <Compile Include="DataCache.cs" />
+    <Compile Include="DESEncrypt.cs" />
     <Compile Include="DirFile.cs" />
     <Compile Include="EmailHelper.cs" />
     <Compile Include="ExcelHelper.cs" />
