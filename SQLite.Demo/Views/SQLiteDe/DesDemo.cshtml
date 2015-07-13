@@ -24,14 +24,18 @@
                 @Html.AntiForgeryToken()
                 <input type="text" name="txt" />
                 <select name="ddl">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+                    <option value="1">加密</option>
+                    <option value="2">解密</option>
                 </select><br />
                 <input type="submit" value="提交" />
                 <input type="button" id="btnJ" value="提交2" />
                 <br />
                 <label id="lbl"></label>
             </form>
+
+            <ul>
+                <li><a href="/Demo/">返回目录</a></li>
+            </ul>
         </fieldset>
                 @ViewBag.Message
         <script src="~/Scripts/jquery-1.10.2.js"></script>

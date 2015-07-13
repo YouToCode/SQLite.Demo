@@ -180,6 +180,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Controllers\SQLiteDeController.cs" />
@@ -246,6 +247,9 @@
     <Content Include="Views\SQLiteDe\Create.cshtml" />
     <Content Include="Views\SQLiteDe\DesDemo.cshtml" />
     <Content Include="Views\SQLiteDe\DesTest.cshtml" />
+    <Content Include="Views\Demo\Index.cshtml" />
+    <Content Include="Views\Demo\CookDemo.cshtml" />
+    <Content Include="Views\Demo\UploadDemo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HCLUtility\HCLUtility.csproj">
@@ -260,6 +264,7 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

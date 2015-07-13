@@ -334,6 +334,73 @@ namespace HCLUtility
             return File.Exists(filePath);
         }
 
+
+        #region 创建一个文件
+        /// <summary>
+        /// 创建一个文件。
+        /// </summary>
+        /// <param name="filePath">文件的绝对路径</param>
+        public static bool CreateFile(string filePath)
+        {
+            bool isTrue = true;
+            try
+            {
+               
+                //如果文件不存在则创建该文件
+                if (!IsExistFile(filePath))
+                {
+                    //创建一个FileInfo对象
+                    FileInfo file = new FileInfo(filePath);
+
+                    //创建文件
+                    FileStream fs = file.Create();
+
+                    //关闭文件流
+                    fs.Close();
+                }
+                else { isTrue = false; }
+            }
+            catch (Exception ex)
+            {
+                //LogHelper.WriteTraceLog(TraceLogLevel.Error, ex.Message);
+                isTrue = false;
+                throw ex;
+            }
+            return isTrue;
+        }
+
+        /// <summary>
+        /// 创建一个文件,并将字节流写入文件。
+        /// </summary>
+        /// <param name="filePath">文件的绝对路径</param>
+        /// <param name="buffer">二进制流数据</param>
+        public static void CreateFile(string filePath, byte[] buffer)
+        {
+            try
+            {
+                //如果文件不存在则创建该文件
+                if (!IsExistFile(filePath))
+                {
+                    //创建一个FileInfo对象
+                    FileInfo file = new FileInfo(filePath);
+
+                    //创建文件
+                    FileStream fs = file.Create();
+
+                    //写入二进制流
+                    fs.Write(buffer, 0, buffer.Length);
+
+                    //关闭文件流
+                    fs.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                //LogHelper.WriteTraceLog(TraceLogLevel.Error, ex.Message);
+                throw ex;
+            }
+        }
+        #endregion
         #endregion
 
         #region 文件夹

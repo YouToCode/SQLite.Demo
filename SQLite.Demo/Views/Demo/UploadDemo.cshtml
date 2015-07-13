@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+      @{Html.BeginForm("UploadDemo", "Demo", FormMethod.Post);}
+        @Html.AntiForgeryToken()
+        
+        @Html.TextBox("file", "", new  { type="file" })
+       
+        @Html.TextBox("sub","提交",new {type="submit"})
+
+     @{Html.EndForm();}
+      @ViewBag.Message
+        <ul>
+            <li><a href="/Demo/">返回目录</a></li>
+        </ul>
+    </div>
+</body>
+</html>

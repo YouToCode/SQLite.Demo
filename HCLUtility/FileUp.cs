@@ -143,12 +143,12 @@ namespace HCLUtility
 
 
         /// <summary>
-        /// 上传文件保存按年月日
+        /// 上传文件保存按年月日\[返回文件路径|文件名]
         /// </summary>
         /// <param name="sFileSourcePath">源文件路径</param>
         /// <param name="sFileTargetPath">保存目录</param>
         /// <param name="checkFileExt">文件格式</param>
-        /// <returns></returns>
+        /// <returns>返回文件路径|文件名</returns>
         public static string CreatUpFilePath(string sFileSourcePath, string sFileTargetPath, string checkFileExt)
         {
             string sOut = null;
