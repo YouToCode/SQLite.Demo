@@ -31,6 +31,16 @@ namespace HCLUtility
             return regex.IsMatch(iReturn.ToString().Trim());
         }
         /// <summary>
+        /// 检测是否有中文字符
+        /// </summary>
+        /// <param name="inputData">输入字符串</param>
+        /// <returns>返回值</returns>
+        public static bool IsHasCHZN(string inputData)
+        {
+            Match m = RegCHZN.Match(inputData);
+            return m.Success;
+        }
+        /// <summary>
         /// 判断输入的字符串是否是一个合法的手机号
         /// </summary>
         /// <param name="input"></param>
@@ -115,6 +125,44 @@ namespace HCLUtility
         {
             Regex regex = new Regex("^[0-9]{4}-[0-9]{8}$");
             return regex.IsMatch(input);
+        }
+        /// <summary>
+        /// 判断输入的字符是否为日期
+        /// </summary>
+        /// <param name="strValue">输入字符串</param>
+        /// <returns>返回值</returns>
+        public static bool IsDate(string strValue)
+        {
+            return Regex.IsMatch(strValue,
+                                 @"^((\d{2}(([02468][048])|([13579][26]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|([1-2][0-9])))))|(\d{2}(([02468][1235679])|([13579][01345789]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))");
+        }
+        /// <summary>
+        /// 判断输入的字符是否为日期,如2004-07-12 14:25|||1900-01-01 00:00|||9999-12-31 23:59
+        /// </summary>
+        /// <param name="strValue">输入字符串</param>
+        /// <returns>返回值</returns>
+        public static bool IsDateHourMinute(string strValue)
+        {
+            return Regex.IsMatch(strValue,
+                                 @"^(19[0-9]{2}|[2-9][0-9]{3})-((0(1|3|5|7|8)|10|12)-(0[1-9]|1[0-9]|2[0-9]|3[0-1])|(0(4|6|9)|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(02)-(0[1-9]|1[0-9]|2[0-9]))\x20(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){1}$");
+        }
+        /// <summary>
+        /// 检查字符串最大长度，返回指定长度的串
+        /// </summary>
+        /// <param name="inputData">输入字符串</param>
+        /// <param name="maxLength">最大长度</param>
+        /// <returns>返回值</returns>			
+        public static string CheckMathLength(string inputData, int maxLength)
+        {
+            if (!string.IsNullOrEmpty(inputData))
+            {
+                inputData = inputData.Trim();
+                if (inputData.Length > maxLength) //按最大长度截取字符串
+                {
+                    inputData = inputData.Substring(0, maxLength);
+                }
+            }
+            return inputData;
         }
 
         public static string file_get_contents(string url, Encoding encode)
