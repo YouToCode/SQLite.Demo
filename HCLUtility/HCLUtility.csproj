@@ -70,6 +70,7 @@
     <Compile Include="JsonHelper.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="MyJsonResultMessageEntity.cs" />
+    <Compile Include="PinYinHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexHelper.cs" />
     <Compile Include="ShowMessage.cs" />
