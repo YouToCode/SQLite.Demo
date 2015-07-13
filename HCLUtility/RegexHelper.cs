@@ -37,8 +37,8 @@ namespace HCLUtility
         /// <returns>返回值</returns>
         public static bool IsHasCHZN(string inputData)
         {
-            Match m = RegCHZN.Match(inputData);
-            return m.Success;
+             Regex regex = new Regex("[\u4e00-\u9fa5]");
+             return regex.IsMatch(inputData);
         }
         /// <summary>
         /// 判断输入的字符串是否是一个合法的手机号
